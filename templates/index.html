@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Shop</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<h2>🛒 Simple Shop</h2>
+
+<div class="container">
+    <div class="products">
+
+        {% for p in products %}
+        <div class="card">
+            <img src="{{ url_for('static', filename='images/' ~ p.name|lower ~ '.jpg') }}">
+            <h3>{{ p.name }}</h3>
+            <p>₹ {{ p.price }}</p>
+
+            {% if is_added(p.id) %}
+                <a style="background:#2ecc71; cursor:default;">
+                    ✔ Added
+                </a>
+            {% else %}
+                <a href="/add/{{ p.id }}">
+                    Add to Cart
+                </a>
+            {% endif %}
+        </div>
+        {% endfor %}
+
+    </div>
+
+    <div style="text-align:center;">
+        <a class="cart-link" href="/cart">View Cart 🧺</a>
+    </div>
+</div>
+
+</body>
+</html>
